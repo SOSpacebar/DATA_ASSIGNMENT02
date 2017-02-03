@@ -149,14 +149,14 @@ void LinkedList::insert_at(int pos, int data)
 
 int LinkedList::pop_at(int pos)
 {
-	Node* curr = head_;
-	Node* prev = 0;
-	int position = 0;
-
 	if (!head_)
 	{
 		return 0;
 	}
+
+	Node* curr = head_;
+	Node* prev = 0;
+	int position = 0;
 
 	if (pos <= 0)
 	{
@@ -353,7 +353,7 @@ bool Brackets(const string& input)
 	stack <char> left_Stack;
 	stack <char> right_Stack;
 
-	for (size_t i = 0; i < input.size(); i++) 
+	for (size_t i = 0; i < input.size(); i++)
 	{
 		//Check for invaild characters
 		if (input[i] == '(' || input[i] == ')' || input[i] == '{' || input[i] == '}' || input[i] == '[' || input[i] == ']' || input[i] == '<' || input[i] == '>')
@@ -361,6 +361,13 @@ bool Brackets(const string& input)
 			//Check for left brackets then push into the stack
 			if (input[i] == '(' || input[i] == '{' || input[i] == '[' || input[i] == '<')
 			{
+				//Check if 'i' no over the size. Then check the current input next is the close bracket.
+				if (i != input.size() - 1  && (input[i] == input[i + 1] - 1 || input[i] == input[i + 1] - 2))
+				{
+					i++;
+					continue;
+				}
+
 				left_Stack.push(input[i]);
 			}
 		}
@@ -371,15 +378,28 @@ bool Brackets(const string& input)
 		}
 	}
 
-	for (size_t i = input.size(); i > 0; i--)
+	for (size_t i = input.size() - 1; i > 0; i--)
 	{
+		//Check for invaild characters
 		if (input[i] == '(' || input[i] == ')' || input[i] == '{' || input[i] == '}' || input[i] == '[' || input[i] == ']' || input[i] == '<' || input[i] == '>')
 		{
 			//Check for right brackets then push into the stack
 			if (input[i] == ')' || input[i] == '}' || input[i] == ']' || input[i] == '>')
 			{
+				//Check if 'i' more then 0. Then check the current input next is the open bracket.
+				if (i > 0 && (input[i] == input[i - 1] + 1 || input[i] == input[i - 1] + 2))
+				{
+					if (i != 1)
+						i--;
+					
+					continue;
+				}
+				
 				right_Stack.push(input[i]);
 			}
+
+			else
+				break;
 		}
 
 		else
@@ -388,17 +408,27 @@ bool Brackets(const string& input)
 		}
 	}
 
+	
+
 	if (left_Stack.size() != right_Stack.size())
 		return false;
 
-	//NOT WORKING..
-	while (right_Stack.empty() && left_Stack.empty() && (left_Stack.top() == right_Stack.top() - 1 || left_Stack.top() == right_Stack.top() - 2))
+
+	while (!right_Stack.empty() && !left_Stack.empty())
 	{
-		left_Stack.pop();
-		right_Stack.pop();
+		if (left_Stack.top() == right_Stack.top() - 1 || left_Stack.top() == right_Stack.top() - 2)
+		{
+			left_Stack.pop();
+			right_Stack.pop();
+		}
+
+		else
+		{
+			return false;
+		}
 	}
 
-    return true;
+	return true;
 }
 
 // Query machine, hits
