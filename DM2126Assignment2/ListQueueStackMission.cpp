@@ -350,6 +350,54 @@ size_t Stack::size()
 // Balanced parenthesis
 bool Brackets(const string& input)
 {
+	stack <char> left_Stack;
+	stack <char> right_Stack;
+
+	for (size_t i = 0; i < input.size(); i++) 
+	{
+		//Check for invaild characters
+		if (input[i] == '(' || input[i] == ')' || input[i] == '{' || input[i] == '}' || input[i] == '[' || input[i] == ']' || input[i] == '<' || input[i] == '>')
+		{
+			//Check for left brackets then push into the stack
+			if (input[i] == '(' || input[i] == '{' || input[i] == '[' || input[i] == '<')
+			{
+				left_Stack.push(input[i]);
+			}
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = input.size(); i > 0; i--)
+	{
+		if (input[i] == '(' || input[i] == ')' || input[i] == '{' || input[i] == '}' || input[i] == '[' || input[i] == ']' || input[i] == '<' || input[i] == '>')
+		{
+			//Check for right brackets then push into the stack
+			if (input[i] == ')' || input[i] == '}' || input[i] == ']' || input[i] == '>')
+			{
+				right_Stack.push(input[i]);
+			}
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+	if (left_Stack.size() != right_Stack.size())
+		return false;
+
+	//NOT WORKING..
+	while (right_Stack.empty() && left_Stack.empty() && (left_Stack.top() == right_Stack.top() - 1 || left_Stack.top() == right_Stack.top() - 2))
+	{
+		left_Stack.pop();
+		right_Stack.pop();
+	}
+
     return true;
 }
 

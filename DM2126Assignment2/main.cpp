@@ -76,7 +76,7 @@ int main()
 
     // part 4
     cout << "Part 4" << endl;
-    const char* input = "<>";
+	const char* input = "{<>}";
     cout << Brackets(input) << endl;
     cout << endl;
 
