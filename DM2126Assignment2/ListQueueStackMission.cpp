@@ -110,9 +110,10 @@ int LinkedList::pop_back()
 	}
 
 	if (!prev)	//Checks if pop to the first node and there is no more prev.
-		return 0;
-	
-	prev->next = 0; //Assign the new node.
+		head_ = 0;
+
+	else
+		prev->next = 0; //Remove the node.
 
 	int returnData = curr->data;
 
@@ -181,6 +182,7 @@ int LinkedList::pop_at(int pos)
 	int returnData = curr->data;
 
 	delete curr;
+
 	return returnData;
 }
 
@@ -206,26 +208,72 @@ size_t LinkedList::size()
 //*******************************************************************//
 // Queue stuff
 //*******************************************************************//
-Queue::Queue() 
+Queue::Queue() : front_(0) , back_(0)
 {
 }
 
 Queue::~Queue()
 {   
+	while (front_)
+	{
+		dequeue();
+	}
 }
 
 void Queue::enqueue(int data)
-{   
+{
+	Node* newNode = new Node(data);
+
+	if (!front_)
+	{
+		front_ = newNode;
+		back_ = front_; //Put the address togather..
+		return;
+	}
+
+	back_->next = newNode;
+	back_ = newNode;
 }
 
 int Queue::dequeue()
 {
-    return 0;
+	if (!front_)
+	{
+		return 0;
+	}
+
+	if (front_ == back_)
+	{
+		back_ = 0;
+	}
+
+	Node* curr = front_;
+
+	front_ = curr->next;
+
+	int returnData = curr->data;
+
+	delete curr;
+	return returnData;
 }
 
 size_t Queue::size()
 {
-    return 0;
+	if (!front_)
+	{
+		return 0;
+	}
+
+	Node* curr = front_;
+	int count = 0;
+
+	while (curr)
+	{
+		count++;
+		curr = curr->next;
+	}
+
+	return count;
 }
 
 //*******************************************************************//

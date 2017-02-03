@@ -52,10 +52,15 @@ int main()
     // part 2
     cout << "Part 2" << endl;
     Queue q;
+	cout << q.size() << endl;
     q.enqueue(20);
     q.enqueue(42);
+	cout << q.size() << endl;
     cout << q.dequeue() << endl;
-    cout << q.size() << endl;
+	q.enqueue(16);
+	cout << q.size() << endl;
+	cout << q.dequeue() << endl;
+	cout << q.dequeue() << endl;
     cout << endl;
 
     // part 3
