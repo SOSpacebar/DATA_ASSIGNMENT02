@@ -286,6 +286,10 @@ Stack::Stack() : top_(0)
 
 Stack::~Stack()
 {
+	while (top_)
+	{
+		pop();
+	}
 }
 
 void Stack::push(int data)

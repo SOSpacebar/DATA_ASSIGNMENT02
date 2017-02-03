@@ -69,8 +69,8 @@ int main()
     s.push(46);
     s.push(8);
 	cout << s.size() << endl;
-    cout << s.pop() << endl;
-	cout << s.pop() << endl;
+    //cout << s.pop() << endl;
+	//cout << s.pop() << endl;
     cout << s.size() << endl;
     cout << endl;
 
