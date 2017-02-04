@@ -387,7 +387,7 @@ bool Brackets(const string& input)
 			if (input[i] == ')' || input[i] == '}' || input[i] == ']' || input[i] == '>')
 			{
 				//Check if 'i' more then 0. Then check the current input next is the open bracket.
-				if (i > 0 && (input[i] == input[i - 1] + 1 || input[i] == input[i - 1] + 2))
+				if (i > 0 && (input[i] - 1 == input[i - 1] || input[i] - 2 == input[i - 1]))
 				{
 					if (i != 1)
 						i--;
@@ -397,9 +397,6 @@ bool Brackets(const string& input)
 				
 				right_Stack.push(input[i]);
 			}
-
-			else
-				break;
 		}
 
 		else
@@ -408,7 +405,6 @@ bool Brackets(const string& input)
 		}
 	}
 
-	
 
 	if (left_Stack.size() != right_Stack.size())
 		return false;
