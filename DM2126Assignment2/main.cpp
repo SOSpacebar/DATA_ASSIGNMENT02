@@ -36,16 +36,16 @@ int main()
     // part 1
     cout << "Part 1" << endl;
     LinkedList ll;
-    ll.push_front(5);
-	ll.push_back(6);
-    cout << ll.size() << endl;
+    //ll.push_front(5);
+	//ll.push_back(6);
+    //cout << ll.size() << endl;
     //cout << ll.pop_back() << endl;
     //cout << ll.pop_front() << endl;
     //cout << ll.pop_back() << endl;
-	ll.insert_at(0, 10);
-	ll.insert_at(-20, 10);
-	ll.push_back(6);
-	ll.push_back(2);
+	ll.insert_at(5, 10);
+	//ll.insert_at(-20, 10);
+	//ll.push_back(6);
+	//ll.push_back(2);
 	//cout << ll.pop_at(0) << endl;
     cout << endl;
 
@@ -83,7 +83,7 @@ int main()
 
     // part 5
     cout << "Part 5" << endl;
-    int dataArray[] = {1, 4, 5, 6, 9, 1, 1, 4};
+    int dataArray[] = {1, 4, 2, 3, 9, 1, 1, 4};
     int queryArray[] = {1, 2, 3};
 
     vector<int> data(dataArray, dataArray + sizeof(dataArray) / sizeof(dataArray[0]));

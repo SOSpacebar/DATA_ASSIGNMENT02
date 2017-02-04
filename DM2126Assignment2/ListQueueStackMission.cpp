@@ -144,7 +144,7 @@ void LinkedList::insert_at(int pos, int data)
 	}
 
 	newNode->next = curr;
-	curr = newNode;
+	prev->next = newNode;
 }
 
 int LinkedList::pop_at(int pos)
@@ -430,4 +430,23 @@ bool Brackets(const string& input)
 // Query machine, hits
 void QueryMachine(vector<int>& data, vector<int>& queries, vector<unsigned int>& results)
 {
+	map<int, unsigned> count;
+
+	for (size_t i = 0; i < queries.size(); i++)
+	{
+		count[queries[i]] = 0;
+	}
+
+	for (size_t i = 0; i < data.size(); i++)
+	{
+		if (count.find(data[i]) != count.end())
+		{
+			count[data[i]]++;
+		}
+	}
+
+	for (size_t i = 0; i < queries.size(); i++)
+	{
+		results.push_back(count[queries[i]]);
+	}
 }
