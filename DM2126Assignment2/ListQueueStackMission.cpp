@@ -425,6 +425,43 @@ bool Brackets(const string& input)
 	}
 
 	return true;
+
+	/* Attempted to use queue.
+	if (input.size() % 2 != 0)
+	{
+		return false;
+	}
+
+	queue <char> dataQueue;
+
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		//Check for invaild characters
+		if (input[i] == '(' || input[i] == ')' || input[i] == '{' || input[i] == '}' || input[i] == '[' || input[i] == ']' || input[i] == '<' || input[i] == '>')
+		{
+			dataQueue.push(input[i]);
+
+			if (dataQueue.front() == dataQueue.back() - 1 || dataQueue.front() ==  dataQueue.back() - 2)
+			{
+				char tempF = dataQueue.front();
+				char tempB = dataQueue.back();
+				dataQueue.pop();
+			}
+
+			if (dataQueue.empty() && i < input.size())
+			{
+				return true;
+			}
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+	
+	return false;*/
 }
 
 // Query machine, hits
